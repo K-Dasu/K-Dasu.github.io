@@ -3181,9 +3181,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @instance
 	   */
 	  remove: function remove(controller) {
-	    // TODO listening?
-	    this.__ul.removeChild(controller.__li);
-	    this.__controllers.splice(this.__controllers.indexOf(controller), 1);
+	  	console.log(controller.__li);
+	  	console.log(this.__ul.childNodes);
+	  	console.log("removing: " + controller.__li.childNodes[0].innerText);
+
+	  	var children = this.__ul.childNodes;
+	  	var childToRemove = null;
+	  	children.forEach(function(d,i){
+	  		if(d.childNodes[0].innerText === controller.__li.childNodes[0].innerText ){
+	  			childToRemove = d;
+	  		}
+	  	});
+	  	if(childToRemove){
+	  		this.__ul.removeChild(childToRemove);
+	    	this.__controllers.splice(this.__controllers.indexOf(controller), 1);
+	  	}
 	    var _this = this;
 	    _common2.default.defer(function () {
 	      _this.onResize();

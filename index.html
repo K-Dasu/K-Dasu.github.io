@@ -30,18 +30,18 @@
 //              "rgb(168,120,110)", "rgb(237,151,202)", "rgb(162,162,162)", "rgb(205,204,93)", "rgb(109,204,218)"]
 
 // tableau 10 (for dark background)
-var colors = ["rgb(31,119,180)", "rgb(255,127,14)", "rgb(44,160,44)", "rgb(214,39,40)", "rgb(148,103,189)",
-              "rgb(23,190,207)", "rgb(227,119,194)", "rgb(127,127,127)", "rgb(188,189,34)", "rgb(140,86,75)",
-		      "rgb(0, 0, 0)"] // last one is for inner circle color
+// var colors = ["rgb(31,119,180)", "rgb(255,127,14)", "rgb(44,160,44)", "rgb(214,39,40)", "rgb(148,103,189)",
+//               "rgb(23,190,207)", "rgb(227,119,194)", "rgb(127,127,127)", "rgb(188,189,34)", "rgb(140,86,75)",
+// 		      "rgb(0,0,0)"] // last one is for inner circle color
 
 // new tableau 10 (for white background)
 var colors = ["rgb(72,123,166)", "rgb(247,142,50)", "rgb(229,93,90)",  "rgb(87,157,82)", "rgb(241,197,79)",
               "rgb(114,181,178)", "rgb(177,126,160)", "rgb(255,160,167)", "rgb(158,117,96)", "rgb(186,176,172)",
-		      "rgb(0, 0, 0)"] // last one is for inner circle color
+		      "rgb(50,50,50)"] // last one is for inner circle color
 
 // from this web site http://vrl.cs.brown.edu/color (2016 VIS paper)
 //var colors = ["rgb(79,140,157)", "rgb(135,21,80)", "rgb(58,166,9)", "rgb(241,82,182)", "rgb(6,150,104)", "rgb(246,57,67)", "rgb(11,57,17)", "rgb(199,18,232)", "rgb(111,125,67)", "rgb(91,8,145)", "rgb(211,122,65)", "rgb(1,54,136)", "rgb(142,55,17)", "rgb(119,113,255)", "rgb(64,45,9)", "rgb(58,145,251)", "rgb(204,117,163)"];
-var controller = { Sex: 'Both', Categories: "Endocrine,nutritional and metabolic diseases,and immunity disorders"};
+var controller = {};
 
 var categories = ["Infectious and parasitic diseases","Neoplasms","Endocrine, nutritional and metabolic diseases, and immunity disorders","Diseases of blood and blood-forming organs","Mental disorders","Diseases of nervous system and sense organs","Diseases of circulatory system","Diseases of respiratory system","Diseases of digestive system","Diseases of genitourinary system","Complications of pregnancy, childbirth, and puerperium","Diseases of skin and subcutaneous tissue","Diseases of musculoskeletal system and connective tissue","Congenital anomalies","Certain conditions originating in perinatal period","Symptoms, signs, and ill-defined conditions","Injury and poisoning"];
 var ageGroups = ["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89" ];
@@ -180,7 +180,21 @@ function draw() {
 					//colStr = "rgb(200, 200, 200)";
 				//}
 
-				var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: colStr } ) );
+                var transparent = false;
+                var opacity = 1.0;
+                if (category == 10) {
+                    transparent = true;
+                    opacity = 0.8;
+                }
+				var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( {
+                    color: colStr,
+                    transparent: transparent,
+                    opacity: opacity
+                } ) );
+                if (category == 10) {
+                    mesh.transparent = true;
+                    mesh.opacity = 0.0;
+                }
 				// var mesh = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( {
 				// 						   color: colStr,
 				// 						   transparent: true,
@@ -199,7 +213,7 @@ function draw() {
 	}
 }
 
-window.addEventListener('DOMContentLoaded', draw, false);
+//window.addEventListener('DOMContentLoaded', draw, false);
 // function onWindowResize(){
 //     camera.aspect = window.innerWidth / window.innerHeight;
 //     camera.updateProjectionMatrix();
@@ -217,8 +231,10 @@ window.addEventListener('resize', function() {
         setTimeout(function() {
             throttled = false;
         }, delay);
-        removeCanvas();
-        draw();
+        if (!document.getElementsByClassName('block')) {
+            removeCanvas();
+            draw();
+        }
     }
 }, false);
 
@@ -259,15 +275,12 @@ function drawImage(imagePath, imageScale) {
     addLabels();
     var originalImg = new Image();
     originalImg.src = imagePath;
-    var aspectRatio  = originalImg.width / originalImg.height;
     var divCanvas = document.getElementById('canvas');
     var imgNode = document.createElement('img');
-    var imgWidth = (imageScale || 1.0) * divCanvas.clientWidth - 1;
-    var imgHeight = imgWidth / aspectRatio;
     imgNode.className = 'story-image';
     imgNode.setAttribute('src', imagePath);
-    imgNode.setAttribute('width', imgWidth);
-    imgNode.setAttribute('height', imgHeight);
+    imgNode.setAttribute('width', "auto");//(imageScale || 1.0) * divCanvas.clientHeight - 1);
+    imgNode.setAttribute('height', "auto" );//(imageScale || 1.0) * divCanvas.clientHeight - 1);
     imgNode.setAttribute('alt', 'image');
     divCanvas.appendChild(imgNode);
 }
@@ -280,6 +293,10 @@ function removeCanvas() {
 	}
 	while (divCanvas.getElementsByClassName('block')[0]) {
 		var element = divCanvas.getElementsByClassName('block')[0];
+		element.remove();
+	}
+    while (divCanvas.getElementsByClassName('canvas-img')[0]) {
+		var element = divCanvas.getElementsByClassName('canvas-img')[0];
 		element.remove();
 	}
     while (divCanvas.getElementsByTagName('img')[0]) {
@@ -332,6 +349,12 @@ function updateControllerOptions(group, values, params){
 	var type = params.allocation[group];
 	var options = params[values];
 	var usersSelection = options;
+
+	var actives = ["CategoryGroups-row", "CategoryGroups-col", "AgeGroups-row", "AgeGroups-col",
+	"sex-col", "sex-row", "sex-cell", "Age Groups", "Category"];
+
+	//Update active values to be what's specified by options
+
 	//if cell then options is not an array
 	if(group.includes("cell")){
 		// single value
@@ -339,12 +362,20 @@ function updateControllerOptions(group, values, params){
 	}
 
 	if(type.includes("sex")){
-		if(usersSelection.length > 1){ controller["Sex"] = "Both";}
-		else{
-			var sexMap = {"m": "Male", "f": "Female"};
-			controller["Sex"] = sexMap[usersSelection[0]];
-		}
+		var label = "sex-" + group;
+		var sexMap = {"m": "Male", "f": "Female"};
+		controller[label] = (usersSelection.length > 1) ? "Both" : sexMap[usersSelection[0]];
 	}
+
+	// ageGroups.forEach(function(ageGroup, i){
+	// 	if(section.includes("cell")){
+	// 		controller["Age Groups"] = ageGroups[options]; 
+	// 	}else{
+	// 		//initialize checkboxes to be false
+	// 		var objectLabel = ageGroup + "-" + section;
+	// 		controller[objectLabel] = false;
+	// 	}
+	// });
 
 	usersSelection.forEach(function(d){
 		if(type.includes("age")){
@@ -366,10 +397,6 @@ function updateController(params){
 	updateControllerOptions("col", "colVals", params);
 	updateControllerOptions("row", "rowVals", params);
 	updateControllerOptions("cell", "cellVal", params);
-
-	addOrRemoveFolder(mapAll[params.allocation.row], f1, 0);
-	addOrRemoveFolder(mapAll[params.allocation.col], f2, 1);
-	addOrRemoveFolder(mapAll[params.allocation.cell], f3, 2);
 }
 
 function updateParams(params, storyNum) {
@@ -393,9 +420,9 @@ function updateParams(params, storyNum) {
         updateController(params);
         removeCanvas();
         if (!params.image) {
-            if(storyNum > 0){ draw(); }
+            if(storyNum >= 0){ draw(); }
         } else {
-            if(storyNum > 0){ drawImage(params.image, params.imageScale); };
+            if(storyNum >= 0){ drawImage(params.image, params.imageScale); };
         }
     }
 }
@@ -431,7 +458,7 @@ function moveGuiPosition() {
     wrapperDiv.appendChild(guiDiv);
 }
 
-// for showing stroies
+// for showing stories
 function createExplanationArea() {
     var explanationArea = document.createElement('div');
     document.getElementById("wrapper").appendChild(explanationArea);
@@ -439,7 +466,7 @@ function createExplanationArea() {
     explanationArea.id = 'explanation-area';
 }
 
-function placeTextInExplanationArea(text) {
+function placeTextInExplanationArea(text, withGoBack, withGoNext, translateRatio) {
     var explanationArea = document.getElementById('explanation-area');
 
     while (explanationArea.childNodes[0]) {
@@ -452,18 +479,22 @@ function placeTextInExplanationArea(text) {
         var textLines = text.split('\n');
         for (var i = 0; i < textLines.length; i++) {
             var pNode = document.createElement('p');
+            pNode.className = "explanation";
             // make space for continuous newlines i.e., \n\n
             if (textLines[i] == '') {
                 pNode.style.height = '1em';
             }
 
-            var textNode = document.createTextNode(textLines[i]);
-            pNode.appendChild(textNode);
+            //var textNode = document.createTextNode(textLines[i]);
+            //pNode.appendChild(textNode);
+            pNode.innerHTML = textLines[i];
             explanationArea.appendChild(pNode);
         }
-
-        var left = document.getElementById("wrapper").clientWidth / 2 - explanationArea.clientWidth / 2;
-        var top = document.getElementById("wrapper").clientHeight / 2 - explanationArea.clientHeight / 2;
+        if (!translateRatio) {
+            translateRatio = [0.0, 0.0];
+        }
+        var left = (1.0 + translateRatio[0]) * document.getElementById("wrapper").clientWidth / 2 - explanationArea.clientWidth / 2;
+        var top = (1.0 + translateRatio[1]) * document.getElementById("wrapper").clientHeight / 2 - explanationArea.clientHeight / 2;
         explanationArea.style.left = left.toString() + 'px';
         explanationArea.style.top = top.toString() + 'px';
         explanationArea.style.backgroundColor = 'rgba(160, 160, 160, 0.3)';
@@ -471,6 +502,25 @@ function placeTextInExplanationArea(text) {
         // for no text, using alpha = 0
         explanationArea.style.backgroundColor = 'rgba(160, 160, 160, 0.0)';
     }
+
+    if (withGoBack) {
+        var goBackButton = document.createElement('a');
+        goBackButton.className = 'btn go-back';
+        goBackButton.appendChild(document.createTextNode('Prev'))
+        explanationArea.appendChild(goBackButton);
+        goBackButton.addEventListener('click', goPrevStory);
+    }
+
+    var goNextButton = document.createElement('a');
+    goNextButton.className = 'btn go-next';
+    if (withGoNext) {
+        goNextButton.appendChild(document.createTextNode('Next'));
+    } else {
+        goNextButton.appendChild(document.createTextNode('Close'));
+    }
+    explanationArea.appendChild(goNextButton);
+    goNextButton.addEventListener('click', goNextStory);
+
 }
 
 function removeExplanationArea() {
@@ -490,9 +540,15 @@ function disconnectEvent(eventType) {
 
 function goNextStory() {
     storyNum++;
+
+    var withGoNext = true;
+    if (storyNum >= stories.length - 1) {
+        withGoNext = false;
+    }
+
     if (storyNum < stories.length) {
-        updateParams(params[storyNum], storyNum);
-        placeTextInExplanationArea(stories[storyNum]);
+        updateParams(stories[storyNum].params, storyNum);
+        placeTextInExplanationArea(stories[storyNum].text, true, withGoNext, stories[storyNum].params.explanationTranslateRatio);
     } else {
         removeExplanationArea();
         disconnectEvent();
@@ -501,114 +557,35 @@ function goNextStory() {
 
 function goPrevStory() {
     storyNum--;
-    if (storyNum < 0) {
+
+    var withGoBack = true;
+    if (storyNum <= 0) {
         storyNum = 0;
+        withGoBack = false;
     }
+
     if (storyNum < stories.length) {
-        updateParams(params[storyNum], storyNum);
-        placeTextInExplanationArea(stories[storyNum]);
+        updateParams(stories[storyNum].params, storyNum);
+        placeTextInExplanationArea(stories[storyNum].text, withGoBack, true, stories[storyNum].params.explanationTranslateRatio);
     }
 }
 
 function initStory() {
     storyNum = 0;
-    updateParams(params[storyNum], storyNum);
+    updateParams(stories[storyNum].params, storyNum);
     createExplanationArea();
-    placeTextInExplanationArea(stories[storyNum]);
-    connectEvent();
+    placeTextInExplanationArea(stories[storyNum].text, false, true, stories[storyNum].params.explanationTranslateRatio);
+    // connectEvent();
 }
 
 </script>
 </head>
 <body>
-    <section id='scroll2'>
-		<div class='scroll__text2'>
-			<div class='step2' data-step='1'>
-				<div class="text">
-					<h1>Diseases — like Ischaemic heart disease and stroke* are the leading causes of death in the world. Could we have prevented this? </h1>
-					<span id="reference">[*]http://www.who.int/gho/mortality_burden_disease/causes_death/top_10/en/</span>
-				</div>
-			</div>
-			<div class='step2' data-step='2'>
-				<div class="sm-text">
-					<p> <span id='bold'> Reasonably so.</span> Doctors and reseachers have pointed out that lifestyle and environmental changes significantly reduce the likelihood of such diseases. But what people may not be quite aware of is the progression of certain diseases and how strongly and positively associated they are to other diseases.</p>
-					</div>
-			</div>
-			<div class='step2' data-step='3'>
-				<div class="sm-text">
-						<p id="small">This is LIGHTNING: a visualization of diseases that is grouped by age, sex, and disease categories classified by ICD-9.*</p>
-
-						<p id="small">With LIGHTNING, we will share stories about the progression of certain diseases and illustrate the likelihood of contracting certain diseases.</p>
-						<span id="reference" style="padding-left: 16px;">[*]http://icd9cm.chrisendres.com/</span>
-					</div>
-			</div>
-		</div>
-	</section>
-
-	<section id='scroll'>
-		<div class='scroll__graphic'>
-			<img src="data/img/0.png">
-		</div>
-		<div class='scroll__text'>
-			<div class='slide-wrapper'>
-				<div class='step' data-step='1'>
-					<p id="annotation">Thickness is tied to the number of diseases that have a stronger positive association at that point .</p>
-				</div>
-			</div>
-
-			<div class='slide-wrapper'>
-				<div class='step' data-step='2'>
-					<p id="annotation">The farther the distance from the center the stronger the positive association</p>
-				</div>
-			</div>
-
-			<div class='slide-wrapper'>
-				<div class='step' data-step='3'>
-					<p id="annotation">Circle size is indicates the number of diseases that have a positive association from the category placed at center.</p>
-				</div>
-			</div>
-
-			<div class='slide-wrapper'>
-				<div class='step' data-step='4'>
-					<p id="annotation">Fluctuation of lightning illustrates the variation in the strength of positive association.</p>
-				</div>
-			</div>
-
-			<div class='slide-wrapper'>
-				<div class='step' data-step='5'>
-					<p id="annotation">Fluctuation of lightning illustrates the variation in the strength of positive association.</p>
-				</div>
-			</div>
-
-			<div class='slide-wrapper'>
-				<div class='step' data-step='6'>
-					<p id="annotation">From the perspective of neoplasms how likely is it to contract a disease within another icd-9-cm group?</p>
-				</div>
-			</div>
-
-			<div class='slide-wrapper'>
-				<div class='step' data-step='7'>
-					<p id="annotation">The shatter shows that there is a high likelihood of contracting either digestive or neurological diseases given neoplasms.</p>
-				</div>
-			</div>
-
-			<div class='slide-wrapper'>
-				<div class='step' data-step='8'>
-					<p id="annotation">Diseases of the blood have the strongest association / likelihood of occurring if you have neoplasms.</p>
-				</div>
-			</div>
-
-		</div>
-	</section>
-
-    <script type="text/javascript" src="./js/scrollama.min.js"></script>
-    <script type="text/javascript" src="./js/scrollama-basic.js"></script>
-    <script type="text/javascript" src="./js/scrollama-sticky.js"></script>
     <script type="text/javascript" src="./js/guiController.js"></script>
 
     <div id="wrapper">
         <div id="header">
-            <h1 id="title">Disease Lightning: Investigating Disease Associations in Taiwan</h1>
+            <h1 id="title">Bacterial Cell: Investigating Disease Associations in Taiwan</h1>
         </div>
         <div id="contents">
             <div id="contents-top">
@@ -626,26 +603,29 @@ function initStory() {
                 <div id="legend-area">
                     <div class="legend">
                         <div class="legend-title">Color</div>
-                        <div class="legend-desc">a category of the disease</div>
+                        <div class="legend-desc">Disease Categories</div>
                         <div id="categories">
                             <script>genCategoryColorAndDesc();</script>
                         </div>
                     </div>
                     <div class="legend">
-                        <div class="legend-title">Center circle size</div>
-                        <div class="legend-desc">the number of diseases that have a positive association from the category placed at center</div>
+                        <div class="legend-title">Body (center circle size)</div>
+                        <div class="legend-desc">Depends on the number of other diseases that positively associate with the selected disease</div>
                     </div>
                     <div class="legend">
-                        <div class="legend-title">Distance from the center circle</div>
-                        <div class="legend-desc">strength of positive association</div>
+                        <div class="legend-title">Flagellum distance from the body</div>
+                        <div class="legend-desc">The longer the flagellum the stronger the association with the selected disease</div>
                     </div>
                     <div class="legend">
-                        <div class="legend-title">Width of lightning</div>
-                        <div class="legend-desc">a number of diseases that have stronger positive association at that point</div>
+                        <div class="legend-title">Thickness of flagellum</div>
+                        <div class="legend-desc">Indicates the number of diseases that have a strong association at that point. </div>
                     </div>
                     <div class="legend">
-                        <div class="legend-title">Fluctuation of lightning</div>
-                        <div class="legend-desc">variation of strength of positive associaton</div>
+                        <div class="legend-title">Bends of flagellum</div>
+                        <div class="legend-desc">Shows how the strength of the association varies</div>
+                    </div>
+                    <div class="misc">
+                        <div class="misc-desc" onclick="initStory();">See our story again.</div>
                     </div>
                 </div>
             </div>

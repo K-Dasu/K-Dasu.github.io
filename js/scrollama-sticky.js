@@ -42,7 +42,7 @@
 
 			// update graphic based on step
 			// graphic.select('p').text(response.index + 1);
-			var imagePath = 'data/img/' + (response.index + 1).toString() + '.png';
+			var imagePath = 'img/' + (response.index + 1).toString() + '.png';
 			graphic.select('img').attr('src', imagePath);
 		}
 

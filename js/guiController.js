@@ -1,215 +1,389 @@
-ageGroups.forEach(function(d, i){
-	controller[d] = false;
-});
+//Variable to track whats currently active
+var activeOptions = {};
 
-var activeAgeGroups = ['6','7','8'];
-controller["60-69"] = true;
-controller["70-79"] = true;
-controller["80-89"] = true;
+//Age Groups for Row, Column, Cell
+function initialzeAge(ageGroupArray){
+	var sections = ["row", "col", "cell"];
 
-controller["Age Groups"] = "40-49";
+	sections.forEach(function(section){
+		ageGroupArray.forEach(function(ageGroup, i){
+			if(section.includes("cell")){
+				//initalize dropdown to arbitrary age group
+				controller["Age Groups"] = "40-49"; 
+			}else{
+				//initialize checkboxes to be false
+				var objectLabel = ageGroup + "-" + section;
+				controller[objectLabel] = false;
+			}
+		});
+	});
+}
 
-categories.slice(0,9).forEach(function(d){
-	controller[d] = false;
-});
+//Sex Groups for Row, Column, Cell
+function initializeSex(){
+	var sections = ["row", "col", "cell"];
 
-var activeCatGroups = [];
+	sections.forEach(function(section){
+		var objectLabel = "sex-" + section;
+		controller[objectLabel] = "Female";
+	});
+}
+
+//Categories for Row, Column, Cell
+function intializeCategories(categoryArray, limit){
+	var sections = ["row", "col", "cell"];
+	var subsetOfCategories = categoryArray.slice(0,limit);
+
+	sections.forEach(function(section){
+		subsetOfCategories.forEach(function(category, i){
+			if(section.includes("cell")){
+				//initalize dropdown to arbitrary category
+				controller["Category"] = "Infectious and parasitic diseases"; 
+			}else{
+				//initialize checkboxes to be false
+				var prefix = "Diseases of ";
+				var repeatStr = category.indexOf(prefix);
+				var objectLabel = (repeatStr > -1) ? category.slice(prefix.length) + "-" + section : category.slice(0,4) + "-" + section;
+				controller[objectLabel] = false;
+			}
+		});
+	});
+}
+
+function intializeFolderValues(){
+	controller["Row Options"] = "Sex";
+	controller["Column Options"] = "Age Groups";
+	controller["Cell Options"] = "Categories";
+}
+
+function initialState(){
+	controller["Row Options"] = "Sex";
+	controller["Column Options"] = "Age Groups";
+	controller["Cell Options"] = "Categories";
+
+	controller["60-69-col"] = true;
+	controller["70-79-col"] = true;
+	controller["80-89-col"] = true;
+
+	activeOptions["AgeGroups-col"] = ['6','7','8'];
+	activeOptions['AgeGroups-row'] = [];
+
+	activeOptions['CategoryGroups-col'] = [];
+	activeOptions['CategoryGroups-row'] = [];
+
+}
+
+//Initializing the controller
+initialzeAge(ageGroups);
+initializeSex();
+intializeCategories(categories, 9);
+initialState();
 
 
-controller["Row Options"] = "Sex";
-controller["Column Options"] = "Age Groups";
-controller["Cell Options"] = "Categories";
+//Individual controllers for each option
+var ageControllerCol = [],
+	ageControllerRow = [],
+	ageControllerCell = null,
+	categoryControllerCol = [],
+	categoryControllerRow = [],
+	categoryControllerCell = null,
+	sexControllerCol = null,
+	sexControllerRow = null,
+	sexControllerCell = null;
 
-
-var sexController = null,
-ageGroupsControllers = [],
-ageController = null,
-catGroupsControllers = [],
-catController = null;
-
+//Creating GUI object
 var gui = new dat.gui.GUI();
 gui.remember(controller);
 gui.close();
 
-var f1 = gui.addFolder('Row');
-rowOptions = f1.add(controller, 'Row Options', ["Sex", "Age Groups", "Categories"]).listen();
-updateSex([updateRowVal], 0, "both", f1); //initially sex
+//Creating + Initializing the Main 3 folders
+var rowFolder = gui.addFolder('Row'),
+ 	colFolder = gui.addFolder('Column'),
+ 	cellFolder = gui.addFolder('Cell');
 
+var rowOptions, columnOptions, cellOptions;
 
-var f2 = gui.addFolder('Column');
-columnOptions = f2.add(controller, 'Column Options', ["Sex", "Age Groups", "Categories"]).listen();
-updateAge([updateRowVal, updateColVal], 1, f2);
+rowOptions = rowFolder.add(controller, "Row Options", ["Sex", "Age Groups", "Categories"]).listen();
+columnOptions = colFolder.add(controller, "Column Options", ["Sex", "Age Groups", "Categories"]).listen();
+cellOptions = cellFolder.add(controller, "Cell Options", ["Sex", "Age Groups", "Categories"]).listen();
 
-var f3 = gui.addFolder('Cell');
-cellOptions = f3.add(controller, 'Cell Options', ["Sex", "Age Groups", "Categories"]).listen();
-updateCategories([updateRowVal, updateColVal, updateCellVal ], 2, f3); //initally disease
-
+intializeFolderValues();
+updateSex([updateRowVal], 0, "both", rowFolder); //row is initially sex
+updateAge([updateRowVal, updateColVal], 1, colFolder);
+updateCategories([updateRowVal, updateColVal, updateCellVal ], 2, cellFolder); //initally disease
 
 function updateSex(updateFunctions, type, value, folder){
-	if(!sexController){
-		if(type < 2){
-			sexController = folder.add(controller, 'Sex', ["Female", "Male", "Both"]);
-		}else{
-			sexController = folder.add(controller, 'Sex', ["Female", "Male"]);
+	if(type === 0){
+		if(!sexControllerRow){
+			sexControllerRow = folder.add(controller, 'sex-row', ["Female", "Male", "Both"]).name("Sex").listen();
+			//When sex is selected do something....
+			sexControllerRow.onFinishChange(function(value) {
+				var active = value;
+				// Fires when a controller loses focus. fires after selection for sex
+				lowerCaseSex = value.charAt(0).toLowerCase();
+				active = (lowerCaseSex.includes("b")) ? ['m','f'] : [lowerCaseSex];
+				updateFunctions[type](active);
+				activeOptions['sex-row'] = active;
+			});
 		}
-
-		//When sex is selected do something....
-		sexController.onFinishChange(function(value) {
-		  // Fires when a controller loses focus. fires after selection for gender
-		  lowerCaseSex = value.charAt(0).toLowerCase();
-		  if (lowerCaseSex.includes("b")){
-		  	updateFunctions[type](['m','f']);
-		  }else{
-		  	updateFunctions[type]([lowerCaseSex]);
-		  }
-
-		});
+	}else if(type === 1){
+		if(!sexControllerCol){
+			sexControllerCol = folder.add(controller, 'sex-col', ["Female", "Male", "Both"]).name("Sex").listen();
+			//When sex is selected do something....
+			sexControllerCol.onFinishChange(function(value) {
+				var active = value;
+				// Fires when a controller loses focus. fires after selection for sex
+				lowerCaseSex = value.charAt(0).toLowerCase();
+				active = (lowerCaseSex.includes("b")) ? ['m','f'] : [lowerCaseSex];
+				updateFunctions[type](active);
+				activeOptions['sex-col'] = active;
+			});
+		}
+	}else if(type === 2){
+		if(!sexControllerCell){
+			sexControllerCell = folder.add(controller, 'sex-cell', ["Female", "Male"]).name("Sex").listen();
+			//When sex is selected do something....
+			sexControllerCell.onFinishChange(function(value) {
+				var active = value;
+				// Fires when a controller loses focus. fires after selection for sex
+				lowerCaseSex = value.charAt(0).toLowerCase();
+				active = (lowerCaseSex.includes("b")) ? ['m','f'] : [lowerCaseSex];
+				updateFunctions[type](active);
+				activeOptions['sex-cell'] = active;
+			});
+		}
 	}
 }
 
 function updateAge(updateFunctions, type, folder){
-	if(type < 2){
+	if(type === 0){
 		ageGroups.forEach(function(d){
-			var tempController = folder.add(controller, d);
-			ageGroupsControllers.push(tempController);
+			var label = d + "-row";
+			var tempController = folder.add(controller, label).name(d).listen();
+			ageControllerRow.push(tempController);
 		});
 
  		//When an age group is selected do something...
- 		ageGroupsControllers.forEach(function(d){
+ 		ageControllerRow.forEach(function(d){
  			d.onFinishChange(function(value) {
 			  // Fires when a controller loses focus. fires after selection for category
 			  if (value){
 			  	//add to active
-			  	var index = ageGroups.indexOf(this.property);
+			  	var ageStr = this.property;
+			  	var index = ageGroups.indexOf(ageStr.substring(0,ageStr.indexOf("-row")));
 			  	if (index !== -1) {
-			  		activeAgeGroups.push(index.toString());
+			  		activeOptions['AgeGroups-row'].push(index.toString());
 			  	}
 			  }else{
 			  	//remove from active
-			  	var index = ageGroups.indexOf(this.property);
-			  	remove(activeAgeGroups, index.toString());
+			  	var ageStr = this.property;
+			  	var index = ageGroups.indexOf(ageStr.substring(0,ageStr.indexOf("-row")));
+			  	remove(activeOptions['AgeGroups-row'], index.toString());
 			  }
 
-			  updateFunctions[type](activeAgeGroups);
+			  updateFunctions[type](activeOptions['AgeGroups-row']);
 			});
  		});
-		}else{
-			if(!ageController){
-	 			ageController = folder.add(controller, 'Age Groups', ageGroups);
-
-	 			//When a category is selected update
-				ageController.onFinishChange(function(value) {
-				  // Fires when a controller loses focus. fires after selection for category
-				  var index = ageGroups.indexOf(value);
-				  updateFunctions[type](index);
-				});
-			}
-		}
 	}
-
-	function updateCategories(updateFunctions, type, folder){
-		if(type < 2){
-			categories.slice(0,9).forEach(function(d){
-				var tempController = folder.add(controller, d);
-				catGroupsControllers.push(tempController);
-			});
+	else if(type === 1){
+		ageGroups.forEach(function(d){
+			var label = d + "-col";
+			var tempController = folder.add(controller, label).name(d).listen();
+			ageControllerCol.push(tempController);
+		});
 
  		//When an age group is selected do something...
- 		catGroupsControllers.forEach(function(d){
+ 		ageControllerCol.forEach(function(d){
  			d.onFinishChange(function(value) {
-			  	// Fires when a controller loses focus. fires after selection for category
-			  	if (value){
+			  // Fires when a controller loses focus. fires after selection for category
+			  if (value){
 			  	//add to active
-			  	var index = categories.slice(0,9).indexOf(this.property);
+			  	var ageStr = this.property;
+			  	var index = ageGroups.indexOf(ageStr.substring(0,ageStr.indexOf("-col")));
+
 			  	if (index !== -1) {
-			  		activeCatGroups.push(index.toString());
+			  		activeOptions['AgeGroups-col'].push(index.toString());
 			  	}
 			  }else{
-			  		//remove from active
-			  		var index = categories.slice(0,9).indexOf(this.property);
-			  		remove(activeCatGroups, index.toString());
-			  	}
+			  	//remove from active
+			  	var ageStr = this.property;
+			  	var index = ageGroups.indexOf(ageStr.substring(0,ageStr.indexOf("-col")));
+			  	activeOptions['AgeGroups-col'] = remove(activeOptions['AgeGroups-col'], index.toString());
+			  }
 
-			  	updateFunctions[type](activeCatGroups);
-			  });
+			  updateFunctions[type](activeOptions['AgeGroups-col']);
+			});
  		});
- 	}else{
- 		if(!catController){
-	 		catController = folder.add(controller, 'Categories', categories.slice(0,9));
-
+	}
+	else if(type === 2){
+		if(!ageControllerCell){
+			ageControllerCell = folder.add(controller, 'Age Groups', ageGroups).name('Age Groups').listen();
 			//When a category is selected update
-			catController.onFinishChange(function(value) {
+			ageControllerCell.onFinishChange(function(value) {
 			  // Fires when a controller loses focus. fires after selection for category
-			  var index = categories.indexOf(value);
+			  var index = ageGroups.indexOf(value.slice(0,5));
+			  activeOptions['AgeGroups-cell'] = index;
 			  updateFunctions[type](index);
 			});
- 		}
+		}	
+	}
+}
+
+function updateCategories(updateFunctions, type, folder){
+	var prefix = "Diseases of ";
+	if(type === 0){
+		categories.slice(0,9).forEach(function(category){
+			var repeatStr = category.indexOf(prefix);
+			var objectLabel = (repeatStr > -1) ? category.slice(prefix.length) + "-row" : category.slice(0,4) + "-row";
+			var tempController = folder.add(controller, objectLabel).name(category).listen();
+			categoryControllerRow.push(tempController);
+		});
+
+		//When an age group is selected do something...
+ 		categoryControllerRow.forEach(function(d){
+ 			d.onFinishChange(function(value) {
+			  	// Fires when a controller loses focus. fires after selection for category
+			  	var index = -1;
+			  	categories.slice(0,9).forEach(function(d, i){
+			  		if(d.includes(this.property)){ index = i;}
+			  	});
+
+			  	if (value){
+				  	//add to active
+				  	if (index !== -1) {
+				  		activeOptions['CategoryGroups-col'].push(index.toString());
+				  	}
+			  	}else{
+			  		//remove from active
+			  		activeOptions['CategoryGroups-col'] = remove(activeOptions['CategoryGroups-col'], index.toString());
+			  	}
+
+			  	updateFunctions[type](activeOptions['CategoryGroups-col']);
+			  });
+ 		});
+	}
+	else if(type === 1){
+		categories.slice(0,9).forEach(function(category){
+			var repeatStr = category.indexOf(prefix);
+			var objectLabel = (repeatStr > -1) ? category.slice(prefix.length) + "-col" : category.slice(0,4) + "-col";
+			var tempController = folder.add(controller, objectLabel).name(category).listen();
+			categoryControllerCol.push(tempController);
+		});
+
+		//When an age group is selected do something...
+ 		categoryControllerCol.forEach(function(d){
+ 			d.onFinishChange(function(value) {
+			  	// Fires when a controller loses focus. fires after selection for category
+			  	var index = -1;
+			  	var disease = this.property;
+			  	categories.slice(0,9).forEach(function(d, i){
+			  		if(d.includes(disease.substring(0,disease.indexOf("-")))){ index = i;}
+			  	});
+			  	
+			  	if (value){
+				  	//add to active
+				  	if (index !== -1) {
+				  		activeOptions['CategoryGroups-col'].push(index.toString());
+				  	}
+			  	}else{
+			  		//remove from active
+			  		activeOptions['CategoryGroups-col'] = remove(activeOptions['CategoryGroups-col'], index.toString());
+			  	}
+
+			  	updateFunctions[type](activeOptions['CategoryGroups-col']);
+			  });
+ 		});
+	}
+	else if(type === 2){
+		if(!categoryControllerCell){
+ 			categoryControllerCell = folder.add(controller, 'Category', categories.slice(0,9)).name('Category').listen();
+
+			//When a category is selected update
+			categoryControllerCell.onFinishChange(function(value) {
+			  // Fires when a controller loses focus. fires after selection for category
+			  var index = categories.indexOf(value);
+			  activeOptions['CategoryGroups-cell'] = index;
+			  updateFunctions[type](index);
+			});
+		}
+	}
+}
+
+function removeSexFromFolder(folder, type){
+	if(type === 0  && sexControllerRow ){
+		sexControllerRow.remove();
+		sexControllerRow = null;
+	}
+	else if(type === 1 && sexControllerCol ){
+		sexControllerCol.remove();
+		sexControllerCol = null;
+	}
+	else if(type === 2 && sexControllerCell){
+		sexControllerCell.remove();
+		sexControllerCell = null;
+	}
+}
+
+function removeAgeFromFolder(folder, type){
+	if(type === 0 && ageControllerRow){
+		ageControllerRow.forEach(function(d){ d.remove(); });
+		ageControllerRow = [];
+	}
+	else if(type === 1 && ageControllerCol){
+		ageControllerCol.forEach(function(d){ d.remove(); });
+		ageControllerCol = [];
+	}
+	else if(type === 2 && ageControllerCell){
+		ageControllerCell.remove();
+		ageControllerCell = null;
+	}
+}
+
+function removeCategoryFromFolder(folder , type){
+	if(type === 0 && categoryControllerRow){
+		categoryControllerRow.forEach(function(d){ d.remove(); });
+		categoryControllerRow = [];
+	}
+	else if(type === 1 && categoryControllerCol){
+		categoryControllerCol.forEach(function(d){ d.remove(); });
+		categoryControllerCol = [];
+	}
+	else if(type === 2 && categoryControllerCell){
+		categoryControllerCell.remove();
+		categoryControllerCell = null;
 	}
 }
 
 function addOrRemoveFolder(value, folder, type){
 	var updateFunctions = [updateRowVal, updateColVal, updateCellVal ];
-	console.log(value);
+
 	if (value.includes("Sex")){ updateSex(updateFunctions, type, value, folder);}
-	else{
-		if(sexController){
-			console.log("removed sex");
-			sexController.remove();
-			sexController = null;
-		}
-	}
+	else { removeSexFromFolder(folder, type);}
 
 	if(value.includes("Age")){ updateAge(updateFunctions, type, folder);}
-	else{
-		if(type < 2){
-			ageGroupsControllers.forEach(function(d){
-				d.remove();
-			});
-			ageGroupsControllers = [];
-		}else{
-			if(ageController){
-				console.log("removed sex");
-				ageController.remove();
-				ageController = null;
-			}
-		}
-	}
+	else{ removeAgeFromFolder(folder, type);}
 
 	if(value.includes("Cat")){ updateCategories(updateFunctions, type, folder);}
-	else{
-		if(type < 2){
-			catGroupsControllers.forEach(function(d){
-				d.remove();
-			});
-			catGroupsControllers = [];
-		}
-		else{
-			if(catController){
-				catController.remove();
-				catController = null;
-			}
-		}
-	}
-
+	else{ removeCategoryFromFolder(folder , type); }
 }
 
 //Error Checks...
 rowOptions.onFinishChange(function(value){
 	//f1
 	updateAllocation(value, 'row')
-	addOrRemoveFolder(value, f1, 0);
+	addOrRemoveFolder(value, rowFolder, 0);
 });
 
 columnOptions.onFinishChange(function(value){
 	//f2
 	updateAllocation(value, 'col')
-	addOrRemoveFolder(value, f2, 1);
+	addOrRemoveFolder(value, colFolder, 1);
 });
 
 cellOptions.onFinishChange(function(value){
 	//f3
 	updateAllocation(value, 'cell')
-	addOrRemoveFolder(value, f3, 2);
+	addOrRemoveFolder(value, cellFolder, 2);
 });
 
 function remove(array, element) {
@@ -218,4 +392,6 @@ function remove(array, element) {
 	if (index !== -1) {
 		array.splice(index, 1);
 	}
+
+	return array;
 }
