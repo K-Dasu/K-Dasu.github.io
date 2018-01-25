@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+	<link href="./css/title.css" rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cormorant:300,400,700' rel='stylesheet' type='text/css'>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div id="container">
+		<div id="explaination">
+		<!-- <p style="text-align: cetner; margin-left: 375px; text-decoration: underline;">DISCLAIMER</p>
+		<br> -->
+		<h1 style="font-size: 40px; text-align:left;" >Diseases - like heart disease and stroke* are the top leading causes of death in the world. Are you safe from them?</h1>
+		<br>
+		<h1 style="font-size: 13px; text-align:left;">[*]http://www.who.int/gho/mortality_burden_disease/causes_death/top_10/en/</h1>
+		</div>
+	</div>
+
+	<script>
+	$(document).on('keydown', function(event){
+	if(event.keyCode == 37) { 
+		event.preventDefault();
+    }
+    else if(event.keyCode == 39) { 
+    	event.preventDefault();
+    }
+});
+
+
+$(document).on('keyup', function(event){
+	if(event.keyCode == 37) { 
+		event.preventDefault();
+		// if (storyNum < stories.length) {
+    		// goPrevStory(); 
+    		window.location.href="index.html"
+    	// }
+    }
+    else if(event.keyCode == 39) { 
+    	event.preventDefault();
+    	// if (storyNum < stories.length) {
+    		window.location.href = "title3.html";
+    	// }
+    }
+});
+	</script>
+</body>
+</html>

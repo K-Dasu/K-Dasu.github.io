@@ -1,0 +1,95 @@
+*, *:after, *:before {
+    /* This is the part that allows your boxes to stay the size you define */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 10px 10px 10px 10px;
+}
+
+@font-face{
+    font-family:'Berkeley-Book';
+    src:url("./font/Berkeley-Book.otf");
+    format('svg');
+}
+
+@font-face{
+    font-family:'Berkeley-Black';
+    src:url("./font/Berkeley-Black.otf");
+    format('svg');
+}
+
+body{
+	background-color: #161514
+}
+
+#container{
+	position: absolute;
+    display: block;
+    width: 97%;
+    height: 93%;
+    border: 1px solid #454544;
+    margin: 0 auto;
+    align-items: center; 
+    /*box-sizing: border-box;
+    overflow: hidden;*/
+}
+
+#explaination{
+	/*position: fixed;*/
+	margin-top: 100px;
+	margin-left: 200px;
+    display: block;
+    width: 70%;
+    height: 70%;
+    /*border: 1px solid #454544;*/
+    /*margin: 0 auto;*/
+    align-items: center; 
+}
+
+h1, h2, p{
+	color: white;
+}
+
+#title{
+	font-family: 'Berkeley-Black'
+	/*text-decoration: underline;*/
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-left: 30px;
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+    /*padding-left: 180px;*/
+    /*padding-right: 190px;*/
+    align: right;
+    font-family: 'Cormorant';
+    font-size: 34px;
+    font-weight: 400;
+}
+
+p {
+    display: block;
+    font-size: 2em;
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+    padding: 20px;
+    /*align: right;*/
+    font-family: 'Roboto';
+    font-size: 17px;
+    font-weight: 400;
+    /*background: #ede6de;*/
+}
+
+
+#bold{
+	font-weight: 700;
+}

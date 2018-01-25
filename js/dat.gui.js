@@ -3181,10 +3181,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @instance
 	   */
 	  remove: function remove(controller) {
-	  	console.log(controller.__li);
-	  	console.log(this.__ul.childNodes);
-	  	console.log("removing: " + controller.__li.childNodes[0].innerText);
-
 	  	var children = this.__ul.childNodes;
 	  	var childToRemove = null;
 	  	children.forEach(function(d,i){
