@@ -5,6 +5,7 @@ var stories = [
             'changeState': true,
             'image': 'img/Intro-0.png',
             'imageScale': 1.0,
+            'fadeIn': true,
             'toggleLegend': true,
             'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -20,6 +21,7 @@ var stories = [
             'changeState': true,
             'toggleLegend': true,
             'toggleCenter': true,
+            'fadeIn': true,
             'image': 'img/Intro-1.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -34,6 +36,7 @@ var stories = [
         'params': {
             'changeState': true,
             'toggleLegend': true,
+            'fadeIn': false,
             'image': 'img/Intro-1.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -49,6 +52,7 @@ var stories = [
             'changeState': true,
             'toggleLegend': true,
             'toggleCenter': true,
+            'fadeIn': true,
             'image': 'img/Intro-2.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -62,6 +66,7 @@ var stories = [
         'text':'The size of the nucleus grows or shrinks depending on the number of how many other diseases are positively associated with the nucleus.',
         'params': {
             'changeState': false,
+            'fadeIn': false,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         },
     },
@@ -70,6 +75,7 @@ var stories = [
         'params': {
             'changeState': true,
             'toggleLegend': true,
+            'fadeIn': false,
             'image': 'img/Intro-2.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -85,6 +91,7 @@ var stories = [
             'changeState': true,
             'toggleLegend': true,
             'toggleCenter': true,
+            'fadeIn': true,
             'image': 'img/Intro-3.png',
             'toggleCenter': true,
             'imageScale': 1.0,
@@ -99,6 +106,7 @@ var stories = [
         'text':'Each flagellum represents another disease category that is positively associated with the nucleus.',
         'params': {
             'changeState': false,
+            'fadeIn': false,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         },
     },
@@ -108,6 +116,7 @@ var stories = [
             'changeState': true,
             'toggleLegend': true,
             'image': 'img/Intro-3.png',
+            'fadeIn': false,
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f'],
@@ -122,6 +131,7 @@ var stories = [
             'changeState': true,
             'image': 'img/Tutorial-1.png',
             'imageScale': 1.0,
+            'fadeIn': true,
             'toggleLegend': true,
             'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -136,6 +146,7 @@ var stories = [
         'params': {
             'changeState': true,
             'toggleLegend': true,
+            'fadeIn': true,
             'image': 'img/Tutorial-2.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -151,6 +162,7 @@ var stories = [
             'changeState': true,
             'image': 'img/Tutorial-3.png',
             'imageScale': 1.0,
+            'fadeIn': true,
             'toggleLegend': true,
             'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},

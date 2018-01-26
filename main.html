@@ -360,7 +360,6 @@ function drawImage(imagePath, imageScale) {
     imgNode.setAttribute('width', "auto");//(imageScale || 1.0) * divCanvas.clientHeight - 1);
     imgNode.setAttribute('height', "auto" );//(imageScale || 1.0) * divCanvas.clientHeight - 1);
     imgNode.setAttribute('alt', 'image');
-    // imgNode.className = 'animated fadeIn';
     divCanvas.appendChild(imgNode);
 }
 
@@ -629,7 +628,8 @@ function toggles(params) {
   toggleTop("contents-left", params.toggleTop);
 	toggleRight("contents-right", params.toggleRight);
 	toggleLegend('legend-area', params.toggleLegend);
-    toggleHighlight('.dg.main .close-button', params.lastSlide);
+  toggleHighlight('.dg.main .close-button', params.lastSlide);
+  fadeIn('story-image', params.fadeIn);
 }
 
 
@@ -637,21 +637,45 @@ function foldContentTopAndColLabelArea(storyNum) {
   var label = document.getElementById("col-label-area");
   var top = document.getElementById("contents-top");
 
-  console.log(label);
-  console.log(top);
+  // console.log(label);
+  // console.log(top);
 
   if (storyNum < 12) {
     label.style.height = '0%';
     top.style.height = '0%';
     //label.style.height('0%');
     //top.setAttribute("display", "none");
-    console.log("inside the if statement");
+    // console.log("inside the if statement");
   } else {
     label.style.height= '10%';
     top.style.height = '5%';
     // top.setAttribute("display",
     // label.setAttribute("display", "block");
     // top.setAttribute("display", "block");
+  }
+}
+
+function fadeIn(idName, toggleOption) {
+  var element = document.getElementsByClassName(idName);
+  var newClass = 'animated';
+  var newClass2 = 'fadeIn';
+
+  // console.log(element)
+
+  if(!toggleOption){
+    for (var i =0; i < element.length; i++){
+        element[i].classList.remove(newClass);
+        element[i].classList.remove(newClass2);
+    }
+    // console.log("Adding Padding");
+  } else {
+    // console.log("I'm inside");
+    for (var i =0; i < element.length; i++){
+        element[i].classList.add(newClass);
+        element[i].classList.add(newClass2);
+        // element[i].setAttribute("-webkit-animation-duration","5s" , "animation-duration" ,"5s");
+    }
+    // console.log("Removing Padding");
   }
 }
 
