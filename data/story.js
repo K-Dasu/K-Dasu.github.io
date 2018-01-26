@@ -32,11 +32,12 @@ var stories = [
         }
     },
     {
-        'text': 'With this representation, we will share stories about the progression of certain diseases and illustrate the likelihood of contracting certain diseases.',
+        'text': 'With this representation, we will share stories about the progression <br>of and likelihood of certain diseases.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
             'fadeIn': false,
+            'toggleCenter': true,
             'image': 'img/Intro-1.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -47,7 +48,7 @@ var stories = [
         }
     },
     {
-        'text':  'The central node mirrors the virus\'s nucleus and represents <br>the core information we’re interested in.' ,
+        'text':  'The central node mirrors the virus\'s nucleus and represents <br>the selected disease of our interest.' ,
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -63,7 +64,22 @@ var stories = [
         }
     },
     {
-        'text':'The size of the nucleus grows or shrinks depending on the number of how many other diseases are positively associated with the nucleus.',
+        'text':'The nucleus ring color represents the disease category we are currently exploring. In this case, the color  <span style="color:#b17ea0;">purple </span> denotes <span style="color:#b17ea0;">circulatory diseases </span>.',
+        'params': {
+            'changeState': true,
+            'toggleLegend': true,
+            'fadeIn': false,
+            'image': 'img/Intro-2.png',
+            'imageScale': 1.0,
+            'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
+            'rowVals': ['f'],
+            'colVals': ['3'],
+            'cellVal': '5',
+            'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
+        },
+    },
+    {
+        'text':'The size of the nucleus grows or shrinks depending on the number of how many other diseases are positively associated with the selected disease.',
         'params': {
             'changeState': false,
             'fadeIn': false,
@@ -71,12 +87,12 @@ var stories = [
         },
     },
     {
-        'text':'The nucleus ring color represents the disease category we are currently exploring. In this case, the color  <span style="color:#b17ea0;">purple </span> denotes <span style="color:#b17ea0;">circulatory diseases </span>.',
+        'text':'So in this case, we can see that many <span style="color:#9e7560;">digestive</span>,<span style="color:#72b5b2;"> nervous </span>, and <span style="color:#bab0ac;">genitourinary </span> diseases have a strong association with <span style="color:#b17ea0;">circulatory diseases </span>.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
-            'fadeIn': false,
             'image': 'img/Intro-2.png',
+            'fadeIn': false,
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f'],
@@ -107,21 +123,7 @@ var stories = [
         'params': {
             'changeState': false,
             'fadeIn': false,
-            'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
-        },
-    },
-    {
-        'text':'We can see below there are many <span style="color:#9e7560;">digestive</span>,<span style="color:#72b5b2;"> nervous </span>, and <span style="color:#bab0ac;">genitourinary </span> diseases that have a strong association with <span style="color:#b17ea0;">circulatory diseases </span>.',
-        'params': {
-            'changeState': true,
-            'toggleLegend': true,
-            'image': 'img/Intro-3.png',
-            'fadeIn': false,
-            'imageScale': 1.0,
-            'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
-            'rowVals': ['f'],
-            'colVals': ['3'],
-            'cellVal': '5',
+            'toggleCenter': true,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         },
     },
