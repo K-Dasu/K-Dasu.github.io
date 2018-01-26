@@ -53,7 +53,6 @@
 html,body {
     height: 100%;
     /*overflow-x: hidden;*/
-
 }
 
 body {
@@ -69,6 +68,7 @@ body {
 .intro_hed{
     font-weight: 700;
 }
+
 h1 {
     display: block;
     font-size: 2em;
@@ -116,16 +116,20 @@ p {
     color: #2a2a2a;
 }
 
-#reference{
+#reference {
     font-size: 10px !important;
-    margin-top: 5px !important;
+    margin-top: 0px !important;
     color: white;
     font-family: 'Lora';
     float: left;
-    margin-left: 8px;
 }
 
-#small{
+#reference a {
+    color: white;
+    text-decoration: none;
+}
+
+#small {
     font-size: 23px;
 }
 
@@ -196,6 +200,7 @@ p {
     float: left;
     width: 20%;
     height: 100%;
+    /* margin-top: -100px; */
     /*margin-top: -100px;*/
     /* border: 1px solid #cccccc; */
 }
@@ -281,7 +286,7 @@ p {
     width: 41%;
     padding-left: 1em;
     padding-right: 1em;
-    padding-top: 1.5em;
+    padding-top: 1em;
     padding-bottom: 0.5em;
     /* text-align: center; */
     /* border: 1px solid #cccccc; */
@@ -421,6 +426,7 @@ div.text{
     cursor: pointer;
     cursor: hand;
     text-decoration: underline;
+    margin-bottom: 0.5em;
 }
 
 .category {
@@ -577,25 +583,26 @@ p.explantion-new{
 }
 
 @keyframes flickerAnimation {
-  0%   { border-color: rgba(204, 204, 204, 255); }
-  50%  { border-color:rgba(204, 204, 204, 0); }
-  100% { border-color:rgba(204, 204, 204, 255); }
+    0%   { border-color: rgba(204, 204, 204, 255); }
+    50%  { border-color:rgba(204, 204, 204, 0); }
+    100% { border-color:rgba(204, 204, 204, 255); }
 }
 @-o-keyframes flickerAnimation{
-  0%   { opacity:1; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+    0%   { border-color: rgba(204, 204, 204, 255); }
+    50%  { border-color:rgba(204, 204, 204, 0); }
+    100% { border-color:rgba(204, 204, 204, 255); }
 }
 @-moz-keyframes flickerAnimation{
-  0%   { opacity:1; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+    0%   { border-color: rgba(204, 204, 204, 255); }
+    50%  { border-color:rgba(204, 204, 204, 0); }
+    100% { border-color:rgba(204, 204, 204, 255); }
 }
 @-webkit-keyframes flickerAnimation{
-  0%   { opacity:1; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+    0%   { border-color: rgba(204, 204, 204, 255); }
+    50%  { border-color:rgba(204, 204, 204, 0); }
+    100% { border-color:rgba(204, 204, 204, 255); }
 }
+
 .animate-flicker {
    -webkit-animation: flickerAnimation 3.5s infinite;
    -moz-animation: flickerAnimation 3.5s infinite;

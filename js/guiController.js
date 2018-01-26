@@ -95,7 +95,7 @@ var ageControllerCol = [],
 	sexControllerCell = null;
 
 //Creating GUI object
-var gui = new dat.gui.GUI({name: 'My GUI'});
+var gui = new dat.gui.GUI({});
 gui.remember(controller);
 gui.close();
 
@@ -236,7 +236,7 @@ function updateAge(updateFunctions, type, folder){
 			if(activeOptions['age-cell'] && canvasExist){updateFunctions[type](activeOptions['age-cell']);}
 			ageControllerCell.onFinishChange(function(value) {
 			  // Fires when a controller loses focus. fires after selection for category
-			  var index = ageGroups.indexOf(value.slice(0,5));
+			  var index = ageGroups.indexOf(value);
 			  activeOptions['age-cell'] = index;
 			  updateFunctions[type](index);
 			});
@@ -398,6 +398,7 @@ columnOptions.onFinishChange(function(value){
 });
 
 cellOptions.onFinishChange(function(value){
+	console.log("Cell??");
 	updateAllocation(value, 'cell')
 	addOrRemoveFolder(value, cellFolder, 2);
 });

@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<title>Disease Map</title>
+<title>Investigating Disease Associations in Taiwan</title>
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/three.js"></script>
 <script src="./data/mesh.js"></script>
@@ -591,7 +591,7 @@ var interval = null;
 function toggleHighlight(className, toggleOption){
 	var glower = $(className);
 	if (toggleOption) {
-        console.log(toggleOption);
+        // console.log(toggleOption);
 		interval = setInterval(function(){ glower.toggleClass('active'); }, 1000);
 	} else {
 		if(interval !== null){
@@ -625,11 +625,11 @@ function toggles(params) {
 	toggleBorders("cell-label", params.toggleCellBorder);
 	toggleTitle("title", params.toggleTitle);
 	toggleTop("contents-top", params.toggleTop);
-  toggleTop("contents-left", params.toggleTop);
+    toggleTop("contents-left", params.toggleTop);
 	toggleRight("contents-right", params.toggleRight);
 	toggleLegend('legend-area', params.toggleLegend);
-  toggleHighlight('.dg.main .close-button', params.lastSlide);
-  fadeIn('story-image', params.fadeIn);
+    toggleHighlight('.dg.main .close-button', params.lastSlide);
+    fadeIn('story-image', params.fadeIn);
 }
 
 
@@ -840,6 +840,7 @@ function goNextStory() {
         toggleTop("contents-top", true);
         toggleTop("contents-left", true);
        	toggleRight("contents-right", true);
+        // toggleLegend("legend-area", toggleOption);
         removeExplanationArea();
         disconnectEvent();
     }
@@ -865,7 +866,6 @@ function goPrevStory() {
 
 function initStory() {
     storyNum = 0; //25
-    console.log(storyNum);
     updateParams(stories[storyNum].params, storyNum);
     removeExplanationArea();
     createExplanationArea();
@@ -961,12 +961,15 @@ function restartStory(){
                     </div>
                     <div class="misc">
                         <div class="misc-desc" onclick="restartStory();">See our story again.</div>
+                        <div class="misc-desc">
+                            <a href="http://associations.phr.tmu.edu.tw">About the data</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- <div id="footer">
-            <a href="http://associations.phr.tmu.edu.tw">About the data</a>
+
         </div> -->
     </div>
     <script>

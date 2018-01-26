@@ -7,7 +7,7 @@ var stories = [
             'imageScale': 1.0,
             'fadeIn': true,
             'toggleLegend': true,
-            'toggleCenter': true,
+            'toggleCenter': false,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f'],
             'colVals': ['3'],
@@ -52,7 +52,7 @@ var stories = [
             'changeState': true,
             'toggleLegend': true,
             'toggleCenter': true,
-            'fadeIn': true,
+            'fadeIn': false,
             'image': 'img/Intro-2.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -91,7 +91,7 @@ var stories = [
             'changeState': true,
             'toggleLegend': true,
             'toggleCenter': true,
-            'fadeIn': true,
+            'fadeIn': false,
             'image': 'img/Intro-3.png',
             'toggleCenter': true,
             'imageScale': 1.0,
@@ -146,7 +146,7 @@ var stories = [
         'params': {
             'changeState': true,
             'toggleLegend': true,
-            'fadeIn': true,
+            'fadeIn': false,
             'image': 'img/Tutorial-2.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -162,7 +162,7 @@ var stories = [
             'changeState': true,
             'image': 'img/Tutorial-3.png',
             'imageScale': 1.0,
-            'fadeIn': true,
+            'fadeIn': false,
             'toggleLegend': true,
             'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -247,7 +247,7 @@ var stories = [
         }
     },
     {
-        'text': 'Also note that there is a strong associativity with <span style="color:#9e7560;">digestive diseases</span>  and as age increases so does the association with <span style="color:#72b5b2;">nervous system disorders</span> .',
+        'text': 'Also note that there is a strong associativity with <span style="color:#9e7560;">digestive diseases</span>  and as age increases so does the association with <span style="color:#72b5b2;">nervous system disorders</span>.',
         'params': {
             'changeState': false,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
