@@ -44,7 +44,7 @@ var stories = [
         }
     },
     {
-        'text':  'The central node mirrors the virus\'s nucleus and represents the core information we’re interested in.' ,
+        'text':  'The central node mirrors the virus\'s nucleus and represents <br>the core information we’re interested in.' ,
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -86,6 +86,7 @@ var stories = [
             'toggleLegend': true,
             'toggleCenter': true,
             'image': 'img/Intro-3.png',
+            'toggleCenter': true,
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f'],
@@ -105,9 +106,9 @@ var stories = [
         'text':'We can see below there are many <span style="color:#9e7560;">digestive</span>,<span style="color:#72b5b2;"> nervous </span>, and <span style="color:#bab0ac;">genitourinary </span> diseases that have a strong association with <span style="color:#b17ea0;">circulatory diseases </span>.',
         'params': {
             'changeState': true,
+            'toggleLegend': true,
             'image': 'img/Intro-3.png',
             'imageScale': 1.0,
-            'toggleLegend': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f'],
             'colVals': ['3'],
@@ -134,9 +135,9 @@ var stories = [
         'text': 'The thickness of the flagellum at a given point indicates the number of diseases with a similar degree of association for that point.',
         'params': {
             'changeState': true,
+            'toggleLegend': true,
             'image': 'img/Tutorial-2.png',
             'imageScale': 1.0,
-            'toggleLegend': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f'],
             'colVals': ['3'],
@@ -177,6 +178,7 @@ var stories = [
             'changeState': true,
             'toggleCenter': true,
             'toggleRowBorder': true,
+            'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f','m'],
             'colVals': ['2','3'],
@@ -185,7 +187,7 @@ var stories = [
         },
     },
     {
-        'text':'Now, our columns look at two age groups 20-29 and 30-39 year olds.',
+        'text':'Now, our columns look at two age groups: 20 - 29 and 30 - 39 year olds.',
         'params': {
             'changeState': true,
             'toggleCenter': true,
