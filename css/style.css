@@ -420,6 +420,15 @@ div.text{
     margin-top: 1em;
 }
 
+.skip-button{
+    cursor: pointer;
+    cursor: hand;
+    margin-right: 15px;
+    position: fixed;
+    bottom: 25px;
+    right: 0;
+}
+
 .misc-desc {
     width: 100%;
     font-size: 11px;

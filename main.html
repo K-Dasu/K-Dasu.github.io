@@ -557,10 +557,8 @@ function toggleTop(idName, toggleOption){
 
   	if(!toggleOption){
   		element.classList.add(newClass);
-  		// console.log("Adding Padding");
   	}else{
   		element.classList.remove(newClass);
-  		// console.log("Removing Padding");
 	}
 }
 
@@ -840,10 +838,18 @@ function goNextStory() {
         toggleTop("contents-top", true);
         toggleTop("contents-left", true);
        	toggleRight("contents-right", true);
-        // toggleLegend("legend-area", toggleOption);
         removeExplanationArea();
         disconnectEvent();
     }
+}
+
+function skip(){
+    storyNum = stories.length - 1;
+    updateParams(stories[storyNum].params, storyNum);
+    placeTextInExplanationArea(stories[storyNum].text, true, false, stories[storyNum].params.explanationTranslateRatio);
+    foldContentTopAndColLabelArea(storyNum);
+
+    $('#skip').fadeOut();
 }
 
 function goPrevStory() {
@@ -965,6 +971,10 @@ function restartStory(){
                             <a href="http://associations.phr.tmu.edu.tw">About the data</a>
                         </div>
                     </div>
+                </div>
+
+                <div id="skip">
+                    <div class="skip-button" onclick="skip();">Skip Story</div>
                 </div>
             </div>
         </div>
