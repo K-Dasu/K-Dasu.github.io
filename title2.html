@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Title</title>
+	<link href="./css/normalize.css" rel ="stylesheet" type='text/css'>
 	<link href="./css/title.css" rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Cormorant:300,400,700' rel='stylesheet' type='text/css'>
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+	<script src="./js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
 	<div id="container">
-		<div id="explaination">
-		<!-- <p style="text-align: cetner; margin-left: 375px; text-decoration: underline;">DISCLAIMER</p>
-		<br> -->
-		<h1 style="font-size: 40px; text-align:left;" >Diseases - like heart disease and stroke* are the top leading causes of death in the world. Are you safe from them?</h1>
-		<br>
-		<h1 style="font-size: 13px; text-align:left;">[*]http://www.who.int/gho/mortality_burden_disease/causes_death/top_10/en/</h1>
+		<div id="explaination2">
+			<h1 class="animated fadeIn" style="font-size: 40px; text-align:left;" >Diseases - like heart disease and stroke* are the top leading causes of death in the world. Are you safe from them?</h1>
+			<h1  class="animated fadeIn"style="font-size: 13px; text-align:left; font-weight: 300; margin-top: -18px;">[*]http://www.who.int/gho/mortality_burden_disease/causes_death/top_10/en/</h1>
+			<br><br>
+			<div id="myDIV" class="animated fadeIn" style="display: none;">
+				<p>Reasonably so.  Doctors and reseachers have pointed out that lifestyle and environmental changes significantly reduce the likelihood of such diseases. However, what people may not be quite aware of is the progression of certain diseases and how strongly and positively associated they are to other diseases.</p>
+			</div>
 		</div>
 	</div>
 
-	<script>
+<script>
+
+	var keyPressCount = 0;
 	$(document).on('keydown', function(event){
-	if(event.keyCode == 37) { 
-		event.preventDefault();
-    }
-    else if(event.keyCode == 39) { 
-    	event.preventDefault();
-    }
-});
+		if(event.keyCode == 37) {
+			event.preventDefault();
+   		}
+    	else if(event.keyCode == 39) {
+    		event.preventDefault();
+			keyPressCount++;
+
+			if(keyPressCount == 1){ myFunction();}
+			else{ window.location.href = "main.html";}
+    	}
+	});
 
 
 $(document).on('keyup', function(event){
-	if(event.keyCode == 37) { 
+	if(event.keyCode == 37) {
 		event.preventDefault();
 		// if (storyNum < stories.length) {
-    		// goPrevStory(); 
+    		// goPrevStory();
     		window.location.href="index.html"
     	// }
     }
-    else if(event.keyCode == 39) { 
+    else if(event.keyCode == 39) {
     	event.preventDefault();
-    	// if (storyNum < stories.length) {
-    		window.location.href = "title3.html";
-    	// }
+			// window.location.href = "title3.html";
     }
 });
-	</script>
+
+function myFunction() {
+    var x = document.getElementById("myDIV");
+     x.style.display = "block";
+}
+</script>
+
 </body>
 </html>

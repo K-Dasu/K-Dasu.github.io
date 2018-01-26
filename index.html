@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Title</title>
+	<link href="./css/normalize.css" rel ="stylesheet" type='text/css'>
 	<link href="./css/title.css" rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Cormorant:300,400,700' rel='stylesheet' type='text/css'>
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+	<script src="./js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
 	<div id="container">
-		<div id="explaination">
-		<h1 id="title">Disease Association Bacteria</h1>
-		<hr style="margin-top:-20px; margin-left: -5px;">
-		<br>
-		<br>
-		<p style="text-align: cnter; margin-left: 375px; text-decoration: underline;">DISCLAIMER</p>
-		<br>
-		<h1 style="font-size: 23px; text-align:center;" >This visualization works best in 1280x800 or larger screen sizes on WebGL supported browsers.</h1>
-		<br>
-		<h1 style="font-size: 23px; text-align:center;">Please use the left and right arrows to navigate through the rest of the visualization.</h1>
+		<div id="header">
+			<h1 id="title">Learning about <br><span style="font-size: 46px;">Disease Associations in Taiwan</span></h1>
+		</div>
+
+		<br><br><br>
+		<div id="instructions">
+			<p class="instructions" style="text-decoration: underline; font-weight: 500;"><span class="corner-left">&#12300;</span>INSTRUCTION</p>
+			<p class="instructions">Please use the left and right keyboard arrows to navigate through the rest of the visualization.</p>
+		<!-- </div>
+			<div id="disclaimer"> -->
+				<br>
+				<p class="instructions" style="text-decoration: underline; font-weight: 500;">DISCLAIMER</p>
+				<p class ="instructions">This visualization works best in 1280x800 or larger screen sizes on WebGL supported browsers.<span class="corner-right">&#12301;</span></p>
 		</div>
 	</div>
 

@@ -4,14 +4,9 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0;
-    margin: 10px 10px 10px 10px;
+    /* margin: 10px 10px 10px 10px; */
 }
 
-@font-face{
-    font-family:'Berkeley-Book';
-    src:url("./font/Berkeley-Book.otf");
-    format('svg');
-}
 
 @font-face{
     font-family:'Berkeley-Black';
@@ -19,47 +14,121 @@
     format('svg');
 }
 
+@font-face{
+    font-family:'Cormorant';
+    src:url("./font/Cormorant/Cormorant-Regular.ttf");
+    format('svg');
+}
+
+@font-face{
+    font-family:'Lato';
+    src:url("./font/Lato/Lato-Regular.ttf");
+    format('svg');
+}
+
+@font-face{
+    font-family:'Open Sans';
+    src:url("./font/Open_Sans/OpenSans-Light.ttf");
+    format('svg');
+}
+
 body{
-	background-color: #161514
+	background-color: #161514;
+}
+
+#myDIV{
+  font-family: 'Lato';
+  font-size: 17px;
+  color: white;
+  padding:0;
+  font-weight: 300;
+  line-height: 1.75;
+  margin: 0;
+
 }
 
 #container{
 	position: absolute;
-    display: block;
-    width: 97%;
-    height: 93%;
-    border: 1px solid #454544;
-    margin: 0 auto;
-    align-items: center; 
-    /*box-sizing: border-box;
-    overflow: hidden;*/
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: block;
+  width: 97%;
+  height: 93%;
+  border: 1px solid #454544;
+  /* margin: 0 auto; */
+  align-items: center;
+  /*box-sizing: border-box;
+  overflow: hidden;*/
 }
-
-#explaination{
-	/*position: fixed;*/
-	margin-top: 100px;
-	margin-left: 200px;
+#header{
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     display: block;
-    width: 70%;
+    width: 60%;
     height: 70%;
-    /*border: 1px solid #454544;*/
-    /*margin: 0 auto;*/
-    align-items: center; 
+    align-items: center;
+}
+#instructions{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: block;
+    width: 29%;
+    margin-top: 280px;
+    /* height: 70%; */
+        /* margin-top: 275px; */
 }
 
+#disclaimer{
+	position: absolute;
+    top: 310px;
+    bottom: 0;
+    left: 420px;
+    right: 0;
+    /* margin: auto; */
+    display: block;
+    width: 29%;
+}
+
+
+
+#explaination2{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: block;
+    width: 66%;
+    height: 65%;
+    align-items: center;
+}
 h1, h2, p{
 	color: white;
 }
 
 #title{
-	font-family: 'Berkeley-Black'
+	font-family: 'Berkeley-Black';
+    text-align: center;
 	/*text-decoration: underline;*/
+    /*padding-left: 6px;*/
 }
 
 h1 {
     display: block;
     font-size: 2em;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     -webkit-margin-before: 0.67em;
     -webkit-margin-after: 0.67em;
     -webkit-margin-start: 0px;
@@ -68,28 +137,86 @@ h1 {
     /*padding-left: 180px;*/
     /*padding-right: 190px;*/
     align: right;
-    font-family: 'Cormorant';
     font-size: 34px;
-    font-weight: 400;
+    text-align:center;
 }
 
 p {
     display: block;
-    font-size: 2em;
+    /* font-size: 2em; */
     -webkit-margin-before: 0.67em;
     -webkit-margin-after: 0.67em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     font-weight: bold;
-    padding: 20px;
+
     /*align: right;*/
-    font-family: 'Roboto';
+    font-family: 'Open Sans';
     font-size: 17px;
-    font-weight: 400;
-    /*background: #ede6de;*/
+    font-weight: 300;
+    text-align: left;
+
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
 }
 
+.disclaimer{
+    font-weight: 300;
+    font-size: 12.5px;
+}
+
+.instructions{
+    font-weight: 300;
+    font-size: 13px;
+}
 
 #bold{
 	font-weight: 700;
+}
+
+.corner-left {
+    position: absolute;
+    top: 2px;
+    left: -35px;
+    font-size: 25px;
+}
+
+.corner-right {
+  position: relative;
+  left: 6%;
+  font-size: 25px;
+  float: right;
+}
+
+.animated {
+  /* background-image: url(/css/images/logo.png);
+  background-repeat: no-repeat;
+  background-position: left top; */
+  /* padding-top:95px; */
+  /* margin-bottom:60px; */
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }

@@ -95,14 +95,14 @@ var ageControllerCol = [],
 	sexControllerCell = null;
 
 //Creating GUI object
-var gui = new dat.gui.GUI();
+var gui = new dat.gui.GUI({name: 'My GUI'});
 gui.remember(controller);
 gui.close();
 
 //Creating + Initializing the Main 3 folders
 var rowFolder = gui.addFolder('Row'),
  	colFolder = gui.addFolder('Column'),
- 	cellFolder = gui.addFolder('Cell');
+ 	cellFolder = gui.addFolder('Commonality');
 
 var rowOptions, columnOptions, cellOptions;
 
@@ -114,6 +114,10 @@ intializeFolderValues();
 updateSex([updateRowVal], 0, "both", rowFolder); //row is initially sex
 updateAge([updateRowVal, updateColVal], 1, colFolder);
 updateCategories([updateRowVal, updateColVal, updateCellVal ], 2, cellFolder); //initally disease
+
+$('.close-button').click(function(d){
+	toggleHighlight('.dg.main .close-button', false);
+});
 
 function updateSex(updateFunctions, type, value, folder){
 	var canvasExist = (document.getElementById('canvas') === null) ? false : true;
@@ -384,20 +388,16 @@ function addOrRemoveFolder(value, folder, type){
 
 //Error Checks...
 rowOptions.onFinishChange(function(value){
-	//f1
 	updateAllocation(value, 'row')
 	addOrRemoveFolder(value, rowFolder, 0);
-	//call the redraw here?
 });
 
 columnOptions.onFinishChange(function(value){
-	//f2
 	updateAllocation(value, 'col')
 	addOrRemoveFolder(value, colFolder, 1);
 });
 
 cellOptions.onFinishChange(function(value){
-	//f3
 	updateAllocation(value, 'cell')
 	addOrRemoveFolder(value, cellFolder, 2);
 });
