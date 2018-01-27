@@ -1,6 +1,6 @@
 var stories = [
     {
-        'text': 'This is our visualization of diseases that is grouped by age, sex, and disease categories classified by ICD-9-CM*.<br /><span id="reference">[*]<a href="http://icd9cm.chrisendres.com/" target="_blank"> http://icd9cm.chrisendres.com/</a></span>',
+        'text': 'This is our visualization of disease co-occurrence. Diseases are grouped by age, sex, and disease categories classified by ICD-9-CM*.<br /><span id="reference">[*]<a href="http://icd9cm.chrisendres.com/" target="_blank"> http://icd9cm.chrisendres.com/</a></span>',
         'params': {
             'changeState': true,
             'image': 'img/Intro-0.png',
@@ -68,6 +68,7 @@ var stories = [
         'params': {
             'changeState': true,
             'toggleLegend': true,
+            'toggleCenter': true,
             'fadeIn': false,
             'image': 'img/Intro-2.png',
             'imageScale': 1.0,
@@ -79,9 +80,10 @@ var stories = [
         },
     },
     {
-        'text':'The size of the nucleus grows or shrinks depending on the number of how many other diseases are positively associated with the selected disease.',
+        'text':'The size of the nucleus grows or shrinks depending on the number of other diseases are positively associated with the selected disease.',
         'params': {
             'changeState': false,
+            'toggleCenter': true,
             'fadeIn': false,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         },
@@ -92,6 +94,7 @@ var stories = [
             'changeState': true,
             'toggleLegend': true,
             'image': 'img/Intro-2.png',
+            'toggleCenter': true,
             'fadeIn': false,
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -119,7 +122,7 @@ var stories = [
         }
     },
     {
-        'text':'Each flagellum represents another disease category that is positively associated with the nucleus.',
+        'text':'Each flagellum represents another disease category that is <br>positively associated with the nucleus.',
         'params': {
             'changeState': false,
             'fadeIn': false,
@@ -144,11 +147,12 @@ var stories = [
         }
     },
     {
-        'text': 'The thickness of the flagellum at a given point indicates the number of diseases with a similar degree of association for that point.',
+        'text': 'The thickness of the flagellum indicates the number of diseases <br> with same degree of association at the given point.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
             'fadeIn': false,
+            'toggleCenter': true,
             'image': 'img/Tutorial-2.png',
             'imageScale': 1.0,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
@@ -218,6 +222,7 @@ var stories = [
         'params': {
             'changeState': true,
             'toggleCellBorder': true,
+            'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f','m'],
             'colVals': ['2','3'],
@@ -238,10 +243,11 @@ var stories = [
         },
     },
     {
-        'text': 'Focusing on <span style="color:#f1c54f;">mental disorders</span>, we see how it evolves over time and have the following observation: the older you become there are more diseases that have a positive association with mental diseases.',
+        'text': 'Focusing on <span style="color:#f1c54f;">mental disorders</span>, we notice that the older you become there are more diseases that have a positive association with mental diseases.',
         'params': {
             'changeState': true, // if changeState == false, other info is optional
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
+            'toggleCenter': true,
             'rowVals': ['f' , 'm'],
             'colVals': ['1', '2','4'],
             'cellVal': '4',
@@ -249,16 +255,18 @@ var stories = [
         }
     },
     {
-        'text': 'Also note that there is a strong associativity with <span style="color:#9e7560;">digestive diseases</span>  and as age increases so does the association with <span style="color:#72b5b2;">nervous system disorders</span>.',
+        'text': 'Noting the thickness and width of the flagellum, you can see that  <span style="color:#9e7560;">digestive diseases</span> have a strong association with mental disorders.',
         'params': {
             'changeState': false,
+            'toggleCenter': true,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         }
     },
     {
-        'text': 'For anyone who has been anxious before and has felt stomach pains this association shouldn’t be too surprising.',
+        'text': 'For anyone who has been anxious before and has felt stomach pains <br>this association shouldn’t be too surprising.',
         'params': {
             'changeState': false,
+            'toggleCenter': true,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         }
     },
@@ -266,6 +274,7 @@ var stories = [
         'text': 'Research supports this association with an example of: Irritable Bowel Syndrome (IBS) commonly co-occurring with depression or anxiety*.<br /><span id="reference">[*]<a href="https://www.nature.com/articles/ajg200468" target="_blank"> Psychosocial Factors are Linked to Functional Gastrointestinal Disorders</a></span>',
         'params': {
             'changeState': true, // if changeState == false, other info is optional
+            'toggleCenter': false,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f' , 'm'],
             'colVals': ['1', '2','4'],
@@ -273,6 +282,27 @@ var stories = [
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         }
     },
+    {
+        'text': 'As age increases, the thickness and length for the <span style="color:#72b5b2;">nervous system disorders</span> flagellum does as well. This illustrates a growth in association.',
+        'params': {
+            'changeState': false,
+            'toggleCenter': true,
+            'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
+        }
+    },
+    {
+        'text': 'As you get older there is a higher risk for both Dementia and Alzheimers which can cause nervous system disorders.<br /><span id="reference">[*]<a href="https://www.mayoclinic.org/diseases-conditions/dementia/symptoms-causes/syc-20352013" target="_blank">Disorders linked to Dementia</a></span>',
+        'params': {
+            'changeState': true, // if changeState == false, other info is optional
+            'toggleCenter': false,
+            'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
+            'rowVals': ['f' , 'm'],
+            'colVals': ['1', '2','4'],
+            'cellVal': '4',
+            'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
+        }
+    },
+    
     {
         'text': 'Let\'s look at another case.',
         'params': {
@@ -289,6 +319,7 @@ var stories = [
         'text': 'Compared to males, female nuclei are larger. So, in females, there are more diseases that are positively associated to <span style="color:#579d52;">blood diseases</span> than males.',
         'params': {
             'changeState': false,
+            'toggleCenter': true,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         }
     },
@@ -303,6 +334,7 @@ var stories = [
         'text': 'This is logical as females in the 20-30’s are sexually active, increasing their likelihood of contracting UTI* and STDs*.<br /><span id="reference"> [*] <a href="https://jamanetwork.com/journals/jama/article-abstract/388951?redirect=true" target="_blank"> Urinary Tract Infections</a>,  Sexually Transmitted Diseases</span>',
         'params': {
             'changeState': true,
+            'toggleCenter': false,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f','m'],
             'colVals': ['2' ,'3'],
@@ -313,6 +345,7 @@ var stories = [
         'text': 'In addition they still have a high risk for anemia*, breast issues, and autoimmune disorders*.<br /><span id="reference">[*]<a href="http://www.bloodjournal.org/content/48/3/449.short?sso-checked=true" target="_blank"> Evaluation of the iron status of a population</a>, <a href="https://www.sciencedirect.com/science/article/pii/S1568997203000065" target="_blank"> Autoimmue disorders</a></span>',
         'params': {
             'changeState': true,
+            'toggleCenter': false,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f','m'],
             'colVals': ['2' ,'3'],
@@ -324,6 +357,7 @@ var stories = [
         'text': 'When we expand the age category, we can see for females as they age the thickness genitourinary decreases while increasing for males.',
         'params': {
             'changeState': true,
+            'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f','m'],
             'colVals': ['2', '3','6','7'],
@@ -331,9 +365,10 @@ var stories = [
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         }
     },{
-        'text': 'The increase in males is due could be attributed to a higher possibility of contracting prostate cancer as they age*.<br /><span id="reference">[*]<a href="https://www.pcf.org/c/prostate-cancer-risk-factors/" target="_blank"> Prostate Cancer and Age</a></span>',
+        'text': 'The increase in males could be attributed to a higher possibility of contracting prostate cancer as they age*.<br /><span id="reference">[*]<a href="https://www.pcf.org/c/prostate-cancer-risk-factors/" target="_blank"> Prostate Cancer and Age</a></span>',
         'params': {
             'changeState': true,
+            'toggleCenter': false,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f','m'],
             'colVals': ['2', '3','6','7'],
@@ -342,10 +377,11 @@ var stories = [
         }
     },
     {
-        'text': 'You can analyze and more stories from this visualization by using controls located on the top right.<br />Right arrow to start exploration.',
+        'text': 'You can analyze more stories from this visualization by using controls located on the top right Press the right arrow to start exploring.',
         'params': {
             'changeState': true,
             'lastSlide': true,
+            'toggleCenter': true,
             'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
             'rowVals': ['f','m'],
             'colVals': ['2', '3','6','7'],

@@ -286,7 +286,7 @@ p {
     width: 41%;
     padding-left: 1em;
     padding-right: 1em;
-    padding-top: 1em;
+    padding-top: 0.8em;
     padding-bottom: 0.5em;
     /* text-align: center; */
     /* border: 1px solid #cccccc; */
@@ -469,7 +469,7 @@ p.explanation {
     -webkit-margin-after: 0em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
-    text-align: left;
+    text-align: center;
     line-height: 1.75;
 }
 

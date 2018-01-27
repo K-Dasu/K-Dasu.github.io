@@ -9,37 +9,49 @@
 
 	<div id="container">
 		<div id="explaination2">
-		<h1 style="font-size: 36px; text-align:left;"><span id="bold">Reasonably so.</span> Doctors and reseachers have pointed out that lifestyle and environmental changes significantly reduce the likelihood of such diseases. But what people may not be quite aware of is the progression of certain diseases and how strongly and positively associated they are to other diseases.</h1>
-		<br>
+			<h1 style="font-size: 36px; text-align:left;">We will explore co-occurrence in diseases.</h1>
+			<br><br>
+			<div id="myDIV" class="animated fadeIn" style="display: none;">
+				<p>
+					There are thousand's of individual diseases.
+					We consider individual diseases that are commonly aggregated into the first 10 disease categories as classified by ICD-9-CM*.
+					<br>
+					<span  class="animated fadeIn"style="font-size: 13px; text-align:left; font-weight: 300; margin-top: -18px;">[*]http://icd9cm.chrisendres.com/</span>
+				</p>
+			</div>
 		</div>
 	</div>
 
 	<script>
+	var keyPressCount = 0;
 	$(document).on('keydown', function(event){
-	if(event.keyCode == 37) { 
-		event.preventDefault();
-    }
-    else if(event.keyCode == 39) { 
-    	event.preventDefault();
-    }
-});
+		if(event.keyCode == 37) {
+			event.preventDefault();
+   		}
+    	else if(event.keyCode == 39) {
+    		event.preventDefault();
+			keyPressCount++;
+
+			if(keyPressCount == 1){ myFunction();}
+			else{ window.location.href = "main.html";}
+    	}
+	});
 
 
-$(document).on('keyup', function(event){
-	if(event.keyCode == 37) { 
-		event.preventDefault();
-		// if (storyNum < stories.length) {
-    		// goPrevStory(); 
-    		window.location.href="title2.html"
-    	// }
-    }
-    else if(event.keyCode == 39) { 
-    	event.preventDefault();
-    	// if (storyNum < stories.length) {
-    		window.location.href = "main.html";
-    	// }
-    }
-});
+	$(document).on('keyup', function(event){
+		if(event.keyCode == 37) { 
+			event.preventDefault();
+			// if (storyNum < stories.length) {
+	    		// goPrevStory(); 
+	    		window.location.href="title2.html"
+	    	// }
+	    }
+	});
+
+	function myFunction() {
+	    var x = document.getElementById("myDIV");
+	     x.style.display = "block";
+	}
 	</script>
 </body>
 </html>

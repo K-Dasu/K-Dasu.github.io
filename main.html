@@ -855,11 +855,12 @@ function skip(){
 function goPrevStory() {
     storyNum--;
 
+    if(storyNum < 0){goToTitle2();}
+
     var withGoBack = true;
     if (storyNum <= 0) {
         storyNum = 0;
         withGoBack = false;
-        goToTitle2();
     }
 
     if (storyNum < stories.length) {
@@ -907,7 +908,7 @@ $(document).on('keyup', function(event){
 });
 
 function goToTitle2(){
-	window.location.href="title2.html";
+	window.location.href="title3.html";
 }
 
 function restartStory(){
