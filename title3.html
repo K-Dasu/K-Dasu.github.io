@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Title</title>
+	<meta charset="UTF-8">
+	<title>Investigating Disease Associations in Taiwan</title>
 	<link href="./css/title.css" rel='stylesheet' type='text/css'>
 	<script src="./js/jquery-3.3.1.min.js"></script>
 </head>
@@ -11,7 +12,7 @@
 		<div id="explaination2">
 			<h1 style="font-size: 36px; text-align:left;">We will explore co-occurrence of diseases.</h1>
 			<br><br>
-			<div id="myDIV"">
+			<div id="myDIV">
 				<p>
 					There are thousands of individual diseases.   Our data contains the co-occurrence of diseases at the level of granularity of ICD-9* codes.In our visualization we group these individual diseases into 10 categories.
 					<br>
@@ -22,23 +23,19 @@
 	</div>
 
 	<script>
-	var keyPressCount = 0;
 	$(document).on('keydown', function(event){
 		if(event.keyCode == 37) {
 			event.preventDefault();
    		}
     	else if(event.keyCode == 39) {
     		event.preventDefault();
-			keyPressCount++;
-
-			if(keyPressCount == 1){ myFunction();}
-			else{ window.location.href = "main.html";}
+			window.location.href = "main.html";
     	}
 	});
 
 
 	$(document).on('keyup', function(event){
-		if(event.keyCode == 37) { 
+		if(event.keyCode == 37) {
 			event.preventDefault();
 	    	window.location.href="title2.html"
 	    }
@@ -51,4 +48,3 @@
 	</script>
 </body>
 </html>
-
