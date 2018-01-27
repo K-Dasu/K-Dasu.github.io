@@ -96,7 +96,7 @@ p {
     padding: 20px;
     /*align: right;*/
     font-family: 'Lora', Serif;
-    Font-Size: 14px;
+    Font-Size: 16px;
     font-weight: 400;
     /* font-size: 15px; */
     /*background: #ede6de;*/
@@ -283,7 +283,7 @@ p {
 
 #explanation-area {
     position: absolute;
-    width: 41%;
+    width: 47%;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 0.8em;
@@ -470,7 +470,7 @@ p.explanation {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     text-align: center;
-    line-height: 1.75;
+    line-height: 1.5;
 }
 
 p.explantion-new{

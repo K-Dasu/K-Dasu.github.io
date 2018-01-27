@@ -1,6 +1,6 @@
 var stories = [
     {
-        'text': 'This is our visualization of disease co-occurrence.', 
+        'text': 'This is our visualization of disease co-occurrence.',
         'params': {
             'changeState': true,
             'image': 'img/Intro-0.png',
@@ -32,7 +32,7 @@ var stories = [
         }
     },
     {
-        'text': 'With this representation, we will share stories about the progression <br>of and the joint occurrence of certain diseases.',
+        'text': 'With this representation, we will share stories about the progression of and the joint occurrence of certain diseases.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -48,7 +48,7 @@ var stories = [
         }
     },
     {
-        'text':  'The central node mirrors the virus\'s nucleus and represents <br>the focal disease category.' ,
+        'text':  'The central node mirrors the virus\'s nucleus and <br> represents the focal disease category.' ,
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -80,7 +80,7 @@ var stories = [
         },
     },
     {
-        'text':'The size of the nucleus grows or shrinks depending on the number of other diseases that are positively associated with the selected disease category.',
+        'text':'The size of the nucleus grows or shrinks depending on the number of other diseases that are associated with the selected disease category.',
         'params': {
             'changeState': false,
             'toggleCenter': true,
@@ -302,7 +302,7 @@ var stories = [
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         }
     },
-    
+
     {
         'text': 'Let\'s look at another case.',
         'params': {
