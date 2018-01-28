@@ -64,7 +64,7 @@ var stories = [
         }
     },
     {
-        'text':'The nucleus ring color represents the disease category we are currently exploring. In this case, the color  <span style="color:#b17ea0;">purple </span> denotes <span style="color:#b17ea0;">circulatory diseases </span>.',
+        'text':'The nucleus ring color represents the disease category we are currently exploring. In this case, the color  <span style="color:#b17ea0;">purple </span> denotes <span style="color:#b17ea0;">circulatory diseases</span>.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -89,7 +89,7 @@ var stories = [
         },
     },
     {
-        'text':'So in this case, we can see that many <span style="color:#9e7560;">digestive</span>,<span style="color:#72b5b2;"> nervous </span>, and <span style="color:#bab0ac;">genitourinary </span> diseases have a strong association with <span style="color:#b17ea0;">circulatory diseases </span>.',
+        'text':'So in this case, we can see that many <span style="color:#9e7560;">digestive</span>,<span style="color:#72b5b2;"> nervous </span>, and <span style="color:#bab0ac;">genitourinary </span> diseases have a strong association with <span style="color:#b17ea0;">circulatory diseases</span>.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
