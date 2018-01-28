@@ -218,7 +218,7 @@ var stories = [
         },
     },
     {
-        'text':'Finally we set the common factor to be a disease category. In this example all of the nuclei will be <span style="color:#b17ea0;">circulatory diseases </span>.',
+        'text':'Finally we set the common factor to be a disease category. In this example all of the nuclei will be <span style="color:#b17ea0;">circulatory diseases</span>.',
         'params': {
             'changeState': true,
             'toggleCellBorder': true,
