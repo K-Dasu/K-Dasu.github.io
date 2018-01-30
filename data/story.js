@@ -89,22 +89,6 @@ var stories = [
         },
     },
     {
-        'text':'So in this case, we can see that many <span style="color:#9e7560;">digestive</span>,<span style="color:#72b5b2;"> nervous </span>, and <span style="color:#bab0ac;">genitourinary </span> diseases have a strong association with <span style="color:#b17ea0;">circulatory diseases</span>.',
-        'params': {
-            'changeState': true,
-            'toggleLegend': true,
-            'image': 'img/Intro-2.png',
-            'toggleCenter': true,
-            'fadeIn': false,
-            'imageScale': 1.0,
-            'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
-            'rowVals': ['f'],
-            'colVals': ['3'],
-            'cellVal': '5',
-            'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
-        },
-    },
-    {
         'text': 'The branches stemming from the nucleus represent the flagella.',
         'params': {
             'changeState': true,
@@ -177,6 +161,22 @@ var stories = [
             'cellVal': '6',
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
         }
+    },
+   {
+        'text':'So in this case, we can see that many <span style="color:#9e7560;">digestive</span>,<span style="color:#72b5b2;"> nervous </span>, and <span style="color:#bab0ac;">genitourinary </span> diseases have a strong association with <span style="color:#b17ea0;">circulatory diseases</span>.',
+        'params': {
+            'changeState': true,
+            'toggleLegend': true,
+            'image': 'img/Intro-0.png',
+            'toggleCenter': true,
+            'fadeIn': false,
+            'imageScale': 1.0,
+            'allocation': {'row':'sex', 'col':'age', 'cell':'category'},
+            'rowVals': ['f'],
+            'colVals': ['3'],
+            'cellVal': '5',
+            'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
+        },
     },
     {
         'text': 'With a better understanding of our model, let’s see how the system works.',
