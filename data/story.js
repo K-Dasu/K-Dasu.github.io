@@ -16,7 +16,7 @@ var stories = [
         }
     },
     {
-        'text': 'Our visualization is modeled after a virus cell.',
+        'text': 'Our visualization is modeled after a salmonella bacteria cell. <br /><span id="reference">[*]<a href="http://www.abc.net.au/radionational/programs/greatmomentsinscience/the-microscopic-high-tech-wizardry-of-bacteria/7752152" target="_blank"> Salmonella Bacteria Image Source </a></span>',
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -48,7 +48,7 @@ var stories = [
         }
     },
     {
-        'text':  'The central node mirrors the virus\'s nucleus and <br> represents the focal disease category.' ,
+        'text':  'The central node mirrors the bacteria\'s capsule and <br> represents the focal disease category.' ,
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -64,7 +64,7 @@ var stories = [
         }
     },
     {
-        'text':'The nucleus ring color represents the disease category we are currently exploring. In this case, the color  <span style="color:#b17ea0;">purple </span> denotes <span style="color:#b17ea0;">circulatory diseases</span>.',
+        'text':'The capsule color represents the disease category we are currently exploring. In this case, the color  <span style="color:#b17ea0;">purple </span> denotes <span style="color:#b17ea0;">circulatory diseases</span>.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -80,7 +80,7 @@ var stories = [
         },
     },
     {
-        'text':'The size of the nucleus grows or shrinks depending on the number of other diseases that are associated with the selected disease category.',
+        'text':'The size of the capsule grows or shrinks depending on the number of other diseases that are associated with the selected disease category.',
         'params': {
             'changeState': false,
             'toggleCenter': true,
@@ -89,7 +89,7 @@ var stories = [
         },
     },
     {
-        'text': 'The branches stemming from the nucleus represent the flagella.',
+        'text': 'The branches stemming from the capsule represent the flagella.',
         'params': {
             'changeState': true,
             'toggleLegend': true,
@@ -115,7 +115,7 @@ var stories = [
         },
     },
     {
-        'text': 'The longer the flagellum, the stronger the association with the nucleus. <br> Indiviudal diseases that have a strong association are placed further away.',
+        'text': 'The longer the flagellum, the stronger the association with the capsule. <br> Indiviudal diseases that have a strong association are placed further away.',
         'params': {
             'changeState': true,
             'image': 'img/Tutorial-1.png',
@@ -218,7 +218,7 @@ var stories = [
         },
     },
     {
-        'text':'Finally we set the common factor to be a disease category. In this example all of the nuclei will be <span style="color:#b17ea0;">circulatory diseases</span>.',
+        'text':'Finally we set the common factor to be a disease category. In this example all of the capsules will be <span style="color:#b17ea0;">circulatory diseases</span>.',
         'params': {
             'changeState': true,
             'toggleCellBorder': true,
@@ -316,7 +316,7 @@ var stories = [
         }
     },
     {
-        'text': 'Compared to males, female nuclei are larger. So, in females, there are more diseases that are associated to <span style="color:#579d52;">blood diseases</span> than males.',
+        'text': 'Compared to males, female capsules are larger. So, in females, there are more diseases that are associated to <span style="color:#579d52;">blood diseases</span> than males.',
         'params': {
             'changeState': false,
             'toggleCenter': true,
