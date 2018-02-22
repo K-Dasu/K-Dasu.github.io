@@ -316,7 +316,7 @@ var stories = [
         }
     },
     {
-        'text': 'Compared to males, female capsules are larger. So, in females, there are more diseases that are associated to <span style="color:#579d52;">blood diseases</span> than males.',
+        'text': 'Compared to males, female capsules are larger. So, in females, there are more diseases that are associated to <span style="color:#e55d5a;">blood diseases</span> than males.',
         'params': {
             'changeState': false,
             'toggleCenter': true,
@@ -324,7 +324,7 @@ var stories = [
         }
     },
     {
-        'text': 'Taking a closer look, we can see that females with <span style="color:#579d52;">blood diseases</span> have much thicker <span style="color:#bab0ac;">genitourinary*</span> flagellum. <br /><span id="reference">[*](Diseases related to the genital and urinary organs.)</span>',
+        'text': 'Taking a closer look, we can see that females with <span style="color:#e55d5a;">blood diseases</span> have much thicker <span style="color:#bab0ac;">genitourinary*</span> flagellum. <br /><span id="reference">[*](Diseases related to the genital and urinary organs.)</span>',
         'params': {
             'changeState': false,
             'explanationTranslateRatio': [-0.1, -0.75] // ratio of x and y
