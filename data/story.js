@@ -16,7 +16,7 @@ var stories = [
         }
     },
     {
-        'text': 'Our visualization is modeled after a salmonella bacteria cell. <br /><span id="reference">[*]<a href="http://www.abc.net.au/radionational/programs/greatmomentsinscience/the-microscopic-high-tech-wizardry-of-bacteria/7752152" target="_blank"> Salmonella Bacteria Image Source </a></span>',
+        'text': 'Our visualization is modeled after a salmonella bacteria cell. <br /><span id="img-reference">[*]<a href="http://www.abc.net.au/radionational/programs/greatmomentsinscience/the-microscopic-high-tech-wizardry-of-bacteria/7752152" target="_blank"> Salmonella Bacteria Image Source </a></span>',
         'params': {
             'changeState': true,
             'toggleLegend': true,

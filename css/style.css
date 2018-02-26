@@ -129,6 +129,18 @@ p {
     text-decoration: none;
 }
 
+#img-reference {
+    font-size: 10px !important;
+    margin-top: 0px !important;
+    color: white;
+    font-family: 'Lora';
+}
+
+#img-reference a {
+    color: white;
+    text-decoration: none;
+}
+
 #small {
     font-size: 23px;
 }
